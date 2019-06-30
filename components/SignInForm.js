@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import axios from 'axios';
+import firebase from 'firebase';
 
 const ROOT_URL = 'https://us-central1-one-time-password-3fad5.cloudfunctions.net';
 
@@ -11,34 +12,32 @@ const SignInForm = () => {
 
   const handleSubmit = async () => {
     try {
-
+      const reqData = { phone: phone, code: code };
+      let { data } = await axios.post(`${ROOT_URL}/verifyOneTimePassword`, reqData);
+      console.log(data);
+      firebase.auth().signInWithCustomToken(data);
     } catch (err) {
       console.log(err);
     }
   }
 
   return (
-    <View>
-      <View style={{ marginBotton: 10 }}>
+    <View style={{ marginTop: 40 }}>
+      <View>
         <Input
           style={styles.inputStyle}
-          //placeholder="Phone number"
+          placeholder="phone"
           label="Phone number"
           keyboardType="phone-pad"
           value={phone}
           onChangeText={phone => setPhone(phone)}
         />
-        <Button
-          style={styles.buttonStyle}
-          title="Submit"
-          onPress={handleSubmit}
-        />
-        <Text>phone: {phone || 'null'}</Text>
+        {/* <Text>phone: {phone || 'null'}</Text> */}
       </View>
-      <View style={{ marginBotton: 10 }}>
+      <View style={{ marginTop: 30 }}>
         <Input
           style={styles.inputStyle}
-          //placeholder="Phone number"
+          placeholder="code"
           label="Verification code"
           keyboardType="phone-pad"
           value={code}
@@ -46,10 +45,10 @@ const SignInForm = () => {
         />
         <Button
           style={styles.buttonStyle}
-          title="Submit"
+          title="Log in"
           onPress={handleSubmit}
         />
-        <Text>code: {phone || 'null'}</Text>
+        {/* <Text>code: {phone || 'null'}</Text> */}
       </View>
     </View>
   );
@@ -57,7 +56,10 @@ const SignInForm = () => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    marginTop: 20,
+    marginTop: 30,
+  },
+  inputStyle: {
+    //marginTop: 20
   }
 });
 

@@ -31,10 +31,10 @@ const SignUpForm = () => {
       />
       <Button
         style={styles.buttonStyle}
-        title="Submit"
+        title="Sign up"
         onPress={handleSubmit}
       />
-      <Text>phone: {phone || 'null'}</Text>
+      {/* <Text>phone: {phone || 'null'}</Text> */}
     </View>
   );
 }
