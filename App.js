@@ -3,13 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import SignUpForm from './components/SignUpForm';
 import SignInForm from './components/SignInForm';
+import keys from './keys';
 
 export default function App() {
 
   useEffect(() => {
     // firebase configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyCmrX54z48_H4d0U_oinLbUsLXzATdxyKQ",
+      apiKey: keys.firebaseApi,
       authDomain: "one-time-password-3fad5.firebaseapp.com",
       databaseURL: "https://one-time-password-3fad5.firebaseio.com",
       projectId: "one-time-password-3fad5",
