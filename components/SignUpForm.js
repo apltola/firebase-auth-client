@@ -10,9 +10,9 @@ const SignUpForm = () => {
 
   const handleSubmit = async () => {
     try {
-      const create = await axios.post(`${ROOT_URL}/createUser`, {phone: phone})
+      let create = await axios.post(`${ROOT_URL}/createUser`, {phone: phone})
       console.log('createUser => ', create.data);
-      const request = await axios.post(`${ROOT_URL}/requestOneTimePassword`, {phone: phone})
+      let request = await axios.post(`${ROOT_URL}/requestOneTimePassword`, {phone: phone})
       console.log(request.data);
     } catch (err) {
       console.log(err);
